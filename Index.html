@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frames of a Life — Samynaathen</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:     #070604;
+  --deep:      #100f0c;
+  --surface:   #181510;
+  --border:    rgba(210,175,110,0.16);
+  --gold:      #d2af6e;
+  --gold2:     #b8924a;
+  --champagne: #efe0bc;
+  --ivory:     #faf5eb;
+  --muted:     #786e58;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--champagne);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;}
+
+/* GRAIN */
+body::after{content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.032'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9000;mix-blend-mode:overlay;}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:4rem 2rem;}
+.hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 50% at 50% 40%,rgba(210,175,110,.11) 0%,transparent 65%),
+             radial-gradient(ellipse 40% 30% at 15% 70%,rgba(184,146,74,.06) 0%,transparent 55%),var(--black);}
+.hero-rules{position:absolute;inset:0;display:flex;justify-content:space-evenly;pointer-events:none;opacity:.055;}
+.hero-rules span{width:1px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);}
+.hero-inner{position:relative;z-index:2;text-align:center;max-width:860px;}
+.hero-pre{font-weight:400;letter-spacing:.55em;font-size:.6rem;color:var(--gold);text-transform:uppercase;margin-bottom:2.5rem;opacity:0;animation:riseIn 1s .2s cubic-bezier(.16,1,.3,1) forwards;}
+.hero-pre::before,.hero-pre::after{content:'—';margin:0 1em;opacity:.5;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(4.5rem,13vw,10.5rem);font-weight:900;line-height:.88;letter-spacing:-.03em;margin-bottom:1.5rem;opacity:0;animation:riseIn 1.2s .4s cubic-bezier(.16,1,.3,1) forwards;}
+.hero-title .w1{display:block;color:var(--ivory);}
+.hero-title .w2{display:block;font-style:italic;-webkit-text-stroke:1px var(--gold);color:transparent;}
+.hero-rule{width:80px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:2rem auto;opacity:0;animation:riseIn .8s .8s ease forwards;}
+.hero-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,2.4vw,1.3rem);color:var(--gold);letter-spacing:.04em;line-height:1.6;opacity:0;animation:riseIn 1s 1s ease forwards;}
+.hero-sub{margin-top:.6rem;font-weight:200;font-size:.7rem;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;opacity:0;animation:riseIn .8s 1.2s ease forwards;}
+.scroll-cue{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:riseIn 1s 1.5s ease forwards;}
+.scroll-cue span{font-size:.58rem;letter-spacing:.4em;color:var(--muted);text-transform:uppercase;}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);animation:pulse 2s ease-in-out infinite;}
+@keyframes riseIn{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+
+/* ── MARQUEE ── */
+.mqwrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.85rem 0;background:var(--deep);}
+.mqtrack{display:flex;white-space:nowrap;animation:ticker 35s linear infinite;}
+.mqtrack span{font-weight:200;letter-spacing:.42em;font-size:.58rem;text-transform:uppercase;color:var(--gold2);padding:0 2.5rem;}
+.mqtrack .sep{color:var(--gold);opacity:.35;letter-spacing:0;padding:0;}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ── CHAPTER ── */
+.chapter{padding:7rem 3rem;max-width:1380px;margin:0 auto;}
+.ch-meta{display:grid;grid-template-columns:auto 1fr auto;align-items:end;gap:2.5rem;margin-bottom:4rem;}
+.ch-num{font-family:'Playfair Display',serif;font-size:6rem;font-weight:900;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(210,175,110,.18);letter-spacing:-.04em;}
+.ch-txt{border-left:1px solid var(--border);padding-left:2rem;}
+.ch-lbl{font-weight:400;letter-spacing:.45em;font-size:.57rem;color:var(--gold);text-transform:uppercase;margin-bottom:.7rem;}
+.ch-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.8rem);font-weight:700;line-height:1.1;color:var(--ivory);}
+.ch-title em{font-style:italic;color:var(--gold);}
+.ch-date{font-weight:200;font-size:.68rem;letter-spacing:.22em;color:var(--muted);margin-top:.5rem;}
+.ch-story{font-family:'Playfair Display',serif;font-style:italic;font-size:.92rem;color:var(--muted);line-height:1.75;max-width:270px;text-align:right;align-self:center;}
+
+/* ── PHOTO CARD ── */
+.photo{position:relative;overflow:hidden;background:var(--surface);cursor:zoom-in;}
+.photo img{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .9s cubic-bezier(.25,.46,.45,.94),filter .6s ease;
+  filter:contrast(1.14) saturate(1.22) brightness(1.03);}
+.photo:hover img{transform:scale(1.07);filter:contrast(1.22) saturate(1.38) brightness(1.07);}
+.photo::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(210,175,110,0) 0%,rgba(210,175,110,.07) 50%,rgba(210,175,110,0) 100%);
+  opacity:0;transition:opacity .5s ease;pointer-events:none;z-index:3;}
+.photo:hover::after{opacity:1;}
+.photo::before{content:'';position:absolute;inset:10px;border:1px solid rgba(210,175,110,0);transition:border-color .4s ease;z-index:5;pointer-events:none;}
+.photo:hover::before{border-color:rgba(210,175,110,.28);}
+.veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,6,4,.88) 0%,rgba(7,6,4,.18) 40%,transparent 70%);opacity:0;transition:opacity .45s ease;z-index:2;}
+.photo:hover .veil{opacity:1;}
+.pcap{position:absolute;bottom:1.2rem;left:1.2rem;right:1.2rem;z-index:4;opacity:0;transform:translateY(10px);transition:all .4s ease;}
+.photo:hover .pcap{opacity:1;transform:translateY(0);}
+.plbl{font-weight:400;font-size:.56rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:.2rem;}
+.ptxt{font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;color:var(--ivory);line-height:1.3;}
+
+/* ═══════════════════════════════════
+   BIRTHDAY GRIDS — 10 photos
+═══════════════════════════════════ */
+/* Row 1: hero-left (2 rows tall) + 2 portrait stacked right */
+.gb1{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:360px 360px;gap:7px;}
+.gb1 .phero{grid-row:1/3;grid-column:1;}
+.gb1 .photo{height:100%;}
+
+/* Row 2: 3 equal portraits */
+.gb2{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:7px;}
+.gb2 .photo{aspect-ratio:3/4;}
+
+/* Row 3: 4 staggered portraits */
+.gb3{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:7px;align-items:start;}
+.gb3 .photo{aspect-ratio:3/4;}
+.gb3 .photo:nth-child(even){margin-top:36px;}
+
+/* ═══════════════════════════════════
+   PHOTOSHOOT GRIDS — 11 photos
+   Clean, balanced, no clumping
+═══════════════════════════════════ */
+
+/* Row 1: 3 equal tall portraits in a clean row */
+.gps1{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+.gps1 .photo{aspect-ratio:2/3;}
+
+/* Row 2: 2-column split — wide left, narrow right */
+.gps2{display:grid;grid-template-columns:1.5fr 1fr;gap:7px;margin-top:7px;}
+.gps2 .photo{aspect-ratio:2/3;}
+
+/* Row 3: 3 equal portraits, middle one elevated */
+.gps3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:7px;align-items:start;}
+.gps3 .photo{aspect-ratio:2/3;}
+.gps3 .photo:nth-child(2){margin-top:-48px;}
+
+/* Row 4: 3 equal portraits */
+.gps4{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:7px;}
+.gps4 .photo{aspect-ratio:2/3;}
+
+/* ═══════════════════════════════════
+   FUNCTION GRIDS — 15 photos
+═══════════════════════════════════ */
+/* Row 1: hero right, 2 stacked left */
+.gfn1{display:grid;grid-template-columns:1fr 1.35fr;grid-template-rows:340px 340px;gap:7px;}
+.gfn1 .pcol{display:grid;grid-template-rows:1fr 1fr;gap:7px;}
+.gfn1 .pcol .photo{height:100%;}
+.gfn1 .phero{grid-column:2;grid-row:1/3;}
+
+/* Row 2: 3 staggered */
+.gfn2{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:7px;align-items:start;}
+.gfn2 .photo{aspect-ratio:3/4;}
+.gfn2 .photo:nth-child(2){margin-top:36px;}
+
+/* Row 3: 4 even */
+.gfn3{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:7px;align-items:start;}
+.gfn3 .photo{aspect-ratio:3/4;}
+.gfn3 .photo:nth-child(odd){margin-top:32px;}
+
+/* Row 4: 3 even */
+.gfn4{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:7px;}
+.gfn4 .photo{aspect-ratio:3/4;}
+.gfn4 .photo:nth-child(2){margin-top:36px;}
+
+/* ── ORNAMENT ── */
+.orn{display:flex;align-items:center;justify-content:center;gap:1.5rem;padding:0 3rem;max-width:1380px;margin:0 auto;}
+.orn-line{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:.18;}
+.orn-dia{width:8px;height:8px;border:1px solid var(--gold);transform:rotate(45deg);opacity:.45;}
+.orn-dot{width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.38;}
+
+/* ── PULL QUOTE ── */
+.pq{text-align:center;padding:5rem 3rem;max-width:820px;margin:0 auto;position:relative;}
+.pq::before{content:'"';position:absolute;top:2rem;left:50%;transform:translateX(-50%);font-family:'Playfair Display',serif;font-size:10rem;color:var(--gold);opacity:.06;line-height:1;pointer-events:none;}
+.pqt{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3.5vw,2.5rem);font-style:italic;color:var(--ivory);line-height:1.55;}
+.pqa{margin-top:1.5rem;font-weight:300;font-size:.64rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;}
+
+/* ── LIGHTBOX ── */
+.lb{display:none;position:fixed;inset:0;background:rgba(5,4,3,.97);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out;backdrop-filter:blur(28px);}
+.lb.on{display:flex;}
+.lb-wrap{position:relative;max-width:88vw;max-height:90vh;}
+.lb-wrap img{max-width:88vw;max-height:90vh;object-fit:contain;display:block;
+  box-shadow:0 60px 180px rgba(0,0,0,.9),0 0 0 1px rgba(210,175,110,.1);
+  filter:contrast(1.1) saturate(1.22) brightness(1.03);}
+.lb-x{position:absolute;top:-52px;right:0;background:none;border:1px solid var(--border);color:var(--champagne);width:40px;height:40px;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s ease;}
+.lb-x:hover{background:var(--gold);color:var(--black);border-color:var(--gold);}
+
+/* ── FOOTER ── */
+.footer{text-align:center;padding:5rem 2rem 4rem;border-top:1px solid var(--border);position:relative;margin-top:4rem;}
+.footer::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent);opacity:.28;margin-top:-30px;}
+.footer-name{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,4.5rem);font-style:italic;font-weight:400;color:var(--ivory);letter-spacing:.02em;margin-bottom:.5rem;}
+.footer-tag{font-weight:200;font-size:.63rem;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(50px);transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1);}
+.reveal.in{opacity:1;transform:none;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .chapter{padding:4rem 1.2rem;}
+  .ch-meta{grid-template-columns:1fr;}
+  .ch-num,.ch-story{display:none;}
+  .gb1{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;}
+  .gb1 .phero{grid-row:auto;grid-column:auto;aspect-ratio:3/4;height:auto;}
+  .gb1 .photo{height:auto;aspect-ratio:3/4;}
+  .gps1,.gps3,.gps4{grid-template-columns:1fr 1fr;}
+  .gps2{grid-template-columns:1fr;}
+  .gps3 .photo:nth-child(2){margin-top:0;}
+  .gfn1{grid-template-columns:1fr;grid-template-rows:auto;}
+  .gfn1 .phero{grid-column:auto;grid-row:auto;aspect-ratio:3/4;}
+  .gfn3{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-rules"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="hero-inner">
+    <p class="hero-pre">A Visual Chronicle · Samynaathen Venkataraman</p>
+    <h1 class="hero-title"><span class="w1">Frames</span><span class="w2">of a Life</span></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-tagline">"Blink and it's gone. Shoot and it stays."</p>
+    <p class="hero-sub">Birthdays · Photoshoots · Functions · Celebrations</p>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mqwrap">
+  <div class="mqtrack">
+    <span>Birthdays</span><span class="sep">◆</span><span>Photoshoots</span><span class="sep">◆</span><span>Functions</span><span class="sep">◆</span><span>Portraits</span><span class="sep">◆</span><span>Celebrations</span><span class="sep">◆</span><span>Memories</span><span class="sep">◆</span><span>Stories in Light</span><span class="sep">◆</span><span>Frozen Moments</span><span class="sep">◆</span>
+    <span>Birthdays</span><span class="sep">◆</span><span>Photoshoots</span><span class="sep">◆</span><span>Functions</span><span class="sep">◆</span><span>Portraits</span><span class="sep">◆</span><span>Celebrations</span><span class="sep">◆</span><span>Memories</span><span class="sep">◆</span><span>Stories in Light</span><span class="sep">◆</span><span>Frozen Moments</span><span class="sep">◆</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     CHAPTER 1 — BIRTHDAY (10 photos)
+     Keys strictly from birthday albums
+══════════════════════════════════ -->
+<section class="chapter reveal">
+  <div class="ch-meta">
+    <div class="ch-num">01</div>
+    <div class="ch-txt">
+      <p class="ch-lbl">Birthday Celebrations</p>
+      <h2 class="ch-title">Candles, Cake &amp; <em>Pure Joy</em></h2>
+      <p class="ch-date">Sastha · Krish · Family Milestones</p>
+    </div>
+    <p class="ch-story">Another year. Another reason to gather, laugh too loud, and hold each other a little longer than usual.</p>
+  </div>
+
+  <!-- Row 1: hero-left spans 2 rows + 4 portraits right -->
+  <div class="gb1">
+    <div class="photo phero" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNcPfpjShFfOzEac59Yhy1EXH734ikLwNxij6W0aUKwnSN37L5rtV9PnLu3R1jley_qjZQXqRfeCQaS-E1tCsK_Boq9lXI-XVT52KblboINob-XRty0=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Birthday</p><p class="ptxt">The Star of the Day</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczN2OYym-RbcgaI4DPFAF6fc7qgYRsKTDf4TJuBRVAgEBBGSEbhfEnL-YBrup-d95PmAE5xSULaSFL1cd1S8OqMKadEJcTpqRHt6nXOdw4YqkQ84kx7A=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Birthday</p><p class="ptxt">Pure Happiness</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczPrGYzRIYSf0u1pWpvUvFuhXL3Z84_ZY2bcYX4F_ockv-_X1XcHJCGR6z6cUTr0d-KSjs6ixOLDarlqBnJZWyrRwQf2Cz_a0ZXBIfBse0G043bqsNah=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Birthday</p><p class="ptxt">Captured in Joy</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczPGpw2AO96Ed322kkIv0DLa2uscav94uWrMpKrv-YWAmr61N87yiVtof6V1ifFHEKrm4knuBz9BfeBZeQE80omaVCaHm8JIcbzar6oqDkOYg97WTeux=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Birthday</p><p class="ptxt">Candlelit Wishes</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOwDLz19hcJFj-G6U2aTBIq1FZw4jlobv7olvPFc6s3qRe3lt_MO7qQ2Xo-WRg9xvGxfTBwQuEu-XiOtvKHXGv5tuljsVJLh36dwg3TYh2zHDpTL4lO=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Birthday</p><p class="ptxt">Bigger Every Year</p></div>
+    </div>
+  </div>
+
+  <!-- Row 2: 3 equal portraits -->
+  <div class="gb2">
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOZoS52xPjAB_RtHgqQXGQ6UlaRzUrx4uIInAdMwNVGTWnJVurHBqzBdHc0c7gjXJeIVZ6J9rH3Juobr9CcHG60DTwD8f5xhNar33Q6WX0CouJaGqt7=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Birthday</p><p class="ptxt">Family First</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOofZu7B5c58NfZl03h16vbXLjbDVDH0No-cGrCcWbzL3NRxkfd7WmIUXst-ZcYGSdWyUtaUJkrqoNtTldTJnTwbKHswDI4rW7LHxKgC-vD7PK5iRAG=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Birthday</p><p class="ptxt">Three & Terrific</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczPYMCidQqdbtiA8Kw2enP-mIkMX9FBrtXbkoblvaApcbUrkN4fax1fJ9gpiaOdi6mCDGCh9iHe73kaz-kznKMFzjY_dvQ70OELJY54BQ71Pzu4SmXuw=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Birthday</p><p class="ptxt">Moments to Keep</p></div>
+    </div>
+  </div>
+
+  <!-- Row 3: 2 staggered (remaining birthday photos) -->
+  <div class="gb3">
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOrhdtEAFsX57J7aj8-d4rEj7NRrD8sxrWsAp52VkbYqggv6b-pjDNJ7T_9BDdHy_pXghgoK-TJgIs9AJqeXafnNiBg2zhYd2ZxeBlhFx_g_zxH7a-M=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Birthday</p><p class="ptxt">Six & Unstoppable</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczPLIet5g5dduS6A6slwSEBnvejHhJSe00ttWYz-RFnfLBocznFeFJAXgvHXLzA04Jzzkqu9LJPlcpwA3GSg5FqKpnCGzTcXaYWR-P2Axw9vwbUtiQ16=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Birthday</p><p class="ptxt">Blow It Out</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczPCS3dN4T79ydtxLXh2sXHV86IE00snt7rwmxsNVaNnuztZWEmv3GJ4zQ2LH2fgvU-jUAFMi3V0oKNnbUCKby6v4cLUyjjAmrrsPT5pkivCHFvA7DJ8=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Birthday</p><p class="ptxt">Cherished</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczMcPGylDW7wcueI0PmjFBxsW7r7Y9z1230u9pYZ2sJc2QgnGyHZ1_EytuOREKJDeRX7FxPPL9bv7Hjs5k9NsObvy_1BJ7RhMTFMLkKJHZkQryn_ecWy=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Birthday</p><p class="ptxt">Forever Remembered</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="pq reveal">
+  <p class="pqt">Birthdays are proof that someone decided to show up — and the world is better for it.</p>
+  <p class="pqa">— Samynaathen Venkataraman</p>
+</div>
+
+<div class="orn"><div class="orn-line"></div><div class="orn-dot"></div><div class="orn-dia"></div><div class="orn-dot"></div><div class="orn-line"></div></div>
+
+<!-- ══════════════════════════════════
+     CHAPTER 2 — PHOTOSHOOT (11 photos)
+     Strictly photoshoot album keys only
+     Clean balanced grids — no clumping
+══════════════════════════════════ -->
+<section class="chapter reveal">
+  <div class="ch-meta">
+    <div class="ch-num">02</div>
+    <div class="ch-txt">
+      <p class="ch-lbl">Professional Photoshoot</p>
+      <h2 class="ch-title">When the Lens <em>Listens</em></h2>
+      <p class="ch-date">Studio &amp; Location Sessions</p>
+    </div>
+    <p class="ch-story">Posed, composed, and quietly alive. Every frame a story told in stillness — a conversation between light and soul.</p>
+  </div>
+
+  <!-- Row 1: 3 clean equal tall portraits -->
+  <div class="gps1">
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNz2w5E4Ztu4OctrtEwgIha4usoctBLMTlYdjt9Fca2CohDBZ6I7dzgYYoAyAJKl6YfbSTPtI-Osqtn2MK8DSfr7d1euQkZlZ9LEg2xnwR5IihgkdyS=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Photoshoot</p><p class="ptxt">In Frame</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczN5eR5-9AsorQ5Y9bBEEHci1SN_ERpsNTdC7JflEZXUCcR81lTr9xHOH5fSXEyc88SUTwc-NExENHtjOn4O40hnVfS6xaWs6D1csrsmJQbCUOgQ_NKF=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Photoshoot</p><p class="ptxt">Composed</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczPk7HDP0JG5-6ucu31eh0_H0OairLriFYLr9PmGMVCOVkeyztTQqFxqCXOi_oMCq6fkOcMCpCnpobvFUHOlOsIGw4IVpVXXogWdtqltLIChlcWSijGu=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Photoshoot</p><p class="ptxt">The Hero Frame</p></div>
+    </div>
+  </div>
+
+  <!-- Row 2: 2-column — wider left, narrower right -->
+  <div class="gps2">
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczP4nbCYYUD5d1knjeoJg9dY9FunZo9YZUMJRojel_uIlmo5BX1rNVIyVauh0pTRwIpk9_J7I1-SURw50otHXOn8cSytLKNCRyyRWBgmRQETT6dzn56p=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Photoshoot</p><p class="ptxt">Light & Grace</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczMQDEeGlp49gWq6HTj13yv67w_97UCT_0rernEqi08jnxkCyoEmVBHRoh-FyymDH6jBy3tJ01G9Jqp6HhJu_3XvLs01Zhd9RWj1yA8KNRpc3QicigMo=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Photoshoot</p><p class="ptxt">Unguarded</p></div>
+    </div>
+  </div>
+
+  <!-- Row 3: 3 portraits, centre raised -->
+  <div class="gps3">
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczO0znk8IgXu1iJTo040tvLiPYoKw54t1chDRta3w3mEIQH_7C1SI6RUbhwY6V410tIHbqtzD04BgW85dGpk6Kfg3gPM31lkffyQtFeZtbeGwgyAx9BZ=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Photoshoot</p><p class="ptxt">Quiet Strength</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOCdO6EFKU5nNHQmnjDJRH6fOlXSSyjXGp_SSGxedjhk9nncL0-kcVA_XVApjjxtjjSn2oGRgkk2FhJGtC7KTnsRb5XvFYV1Br4NGicPhILoLEx9t0H=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Photoshoot</p><p class="ptxt">Still Life, Still Alive</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczM3GZjOw9N508piZZwu8ETICPz345Z4105dwn7NV_Yz6h_JOgjmEqMEi3nqhiImPmrwxDb3p159mF_8EY6RYJhXlqAyLtpOoD6PukQARwkh8Jx7JDx1=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Photoshoot</p><p class="ptxt">Elevated</p></div>
+    </div>
+  </div>
+
+  <!-- Row 4: final 3 equal -->
+  <div class="gps4">
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczO2RtTbgiZL6Adm-gl2P3IxbwxMCdLLitVUb-ki75bVVKyixINVQz9GJPtZz0ZAeg5FvY0DjAQpVCQO-hcfpxOssp-T7iVHEUsGExV9TiJ0qQ2r2fDS=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Photoshoot</p><p class="ptxt">Character</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczO0znk8IgXu1iJTo040tvLiPYoKw54t1chDRta3w3mEIQH_7C1SI6RUbhwY6V410tIHbqtzD04BgW85dGpk6Kfg3gPM31lkffyQtFeZtbeGwgyAx9BZ=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Photoshoot</p><p class="ptxt">The Final Take</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOCdO6EFKU5nNHQmnjDJRH6fOlXSSyjXGp_SSGxedjhk9nncL0-kcVA_XVApjjxtjjSn2oGRgkk2FhJGtC7KTnsRb5XvFYV1Br4NGicPhILoLEx9t0H=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Photoshoot</p><p class="ptxt">Soft Focus</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="pq reveal">
+  <p class="pqt">The camera is an instrument that teaches people how to see without a camera.</p>
+  <p class="pqa">— Dorothea Lange</p>
+</div>
+
+<div class="orn"><div class="orn-line"></div><div class="orn-dot"></div><div class="orn-dia"></div><div class="orn-dot"></div><div class="orn-line"></div></div>
+
+<!-- ══════════════════════════════════
+     CHAPTER 3 — FUNCTION (15 photos)
+     Strictly function album keys only
+══════════════════════════════════ -->
+<section class="chapter reveal">
+  <div class="ch-meta">
+    <div class="ch-num">03</div>
+    <div class="ch-txt">
+      <p class="ch-lbl">Functions &amp; Celebrations</p>
+      <h2 class="ch-title">Dressed Up, <em>Showing Up</em></h2>
+      <p class="ch-date">Family Events · Festivities · Gatherings</p>
+    </div>
+    <p class="ch-story">The occasions that make us put on our finest and gather — because some moments demand to be honoured in full colour.</p>
+  </div>
+
+  <!-- Row 1: 2-col stacked left + hero right -->
+  <div class="gfn1">
+    <div class="pcol">
+      <div class="photo" onclick="openLb(this)">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPi_Z7_w_w6SDzai2B0xC_ND_h6j9dOtRMXcbokgOIm8LlkOiFFAfNZXARgbP1E6tqIK6KSQlAfJka6axHMbrMt0cV87GQV_Nq-oxCDUhcm0NLNKDOw=w1200-h1600-no" alt="" loading="lazy">
+        <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">Dressed & Radiant</p></div>
+      </div>
+      <div class="photo" onclick="openLb(this)">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczNduRS_Po_kiuiv4buxxjUjV-8vN59FEyUDtP9dHZoz-d7EDY_u1jTkQFPLMxiCbUb_SyIOZaP4T5RH2F9IPKtJGGH14xk8vLkhzPmGwnyOVsyH3Zy4=w1200-h1600-no" alt="" loading="lazy">
+        <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">Golden Hour</p></div>
+      </div>
+    </div>
+    <div class="photo phero" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNqmW-xfk5lyH_KlxljXLMO8dEgyysE7CJI-uJ8Q59uPPUiIUPGsCR-dhybXqI1OS8-tH6kn8X2LRH69q4ollkgm1UkSovE5AlEEx9TLmKMeFStewhG=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Function · Hero</p><p class="ptxt">In Full Splendour</p></div>
+    </div>
+  </div>
+
+  <!-- Row 2: 3 staggered -->
+  <div class="gfn2">
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNgpOwQeaiw2EVy002xB8_daJFiO14lahztJ8YZM4ok5b8t9moU1sX2tMk_wwrcodMJmu-n1fNpVeUu6vDEvwp0EUGZRVcxP611X4arN04ougvRju-B=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">The Gathering</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOhJXAie5Rk4vfNQv6ydyeOvzQU30WB7-Iwj3i1wl60sOo5rYoOJYL-Cmz44aRDFIbzSkQvFmUcooNahiht1SLR3WRzwgDZh_s4rVf_tRDn1Tm5bsQX=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">Threads of Tradition</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczPm5I0iy2Cd44-3T3GHf42eqx6EuWOeBtBb8HzrJgw31jE-0cZpp1Ufv0ku4fGDAbSkNGB6kCgRR-lODMxJGgNthipzLfvmrOtmgIcGVlY1wEaU2sN8=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">Generations Together</p></div>
+    </div>
+  </div>
+
+  <!-- Row 3: 4 staggered -->
+  <div class="gfn3">
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczPcaT7svCguoMZnl_aRHPnTrmT0FEu3puWvhtoJNTn0jA4LWrO1WdBZCovTTrz7JInmf_golzzS9G-ohNwKjSWullpNEbsb9o-_uTYSeqkd8E0oCrwl=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">Ceremony & Colour</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOYAa79_LUXGUEWB56UEsonKVuraqwo30axemYDldxeX1WT1X9f063qt2VRixIWf9iq4mKG6F6AVzKQ7F9W4ZDIfBpC0AV-gGYcYNrDgdb7LEY-beE6=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">Poised & Present</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczPTAZSJKB8J2EYEuL9DfIJWB7L4blm3dJYTvU4qATulnyXpLp6wPcXfrMdR0ayo7yoDb8VZtwIgp5pykbKsyQ4upZtk2ZXohqNBnDh19f9jwXlKUJ1R=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">Adorned in Grace</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNjxoOQsNEt1RZI1GLpd9nwOU6F6GYyIzJSIowLrCb8EBzjhX79Pad__jcuErFqcU6eibFVmnJ1D20wr-CZSgyCKE7XwkGJdh8m4vaNUZXTw0gXuoAv=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">The Occasion</p></div>
+    </div>
+  </div>
+
+  <!-- Row 4: 3 staggered -->
+  <div class="gfn4">
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczP-me6hvM01LefySLudk3ETKn2ubB_zyWjCEGV8EoXXkrR7-G5ZsCjgeDx0DypGuwl2O26_wPpESByMZKJ5WR5V19-n32Wxxd8-WJzfj5HmH7wBH4-1=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">Timeless Elegance</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNEkVnj9SMP5nNOQrtnw7BTbh36oJJeq7Q91rgk1VRZA1KQwhVrYX8SZiHcY20xnj7mI8Z9JibJTHkU6pY1k5FqU2yXFFuxA8MMKye7_fcS2QJ_YbVc=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">Festive & Free</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczMa-bl9VxaRZYXtbWEANHPJVQlniB49GuK5-ep_mrr9BsRWDZuNPE_brl4NpMHwHqoUCbCgkSE5zgo76TQN7NHSkKtUnw3onar8JW0XM90jyr51RmLT=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">Dressed in Story</p></div>
+    </div>
+  </div>
+
+  <!-- Row 5: final 3 -->
+  <div class="gfn2" style="margin-top:7px;">
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNbj11UjfwxlZcwpYXR69ctO7aO8nvxaPNK4Tei8bYVoo9qImFK2yxhQo7XfojGRKid2VHwR1XPig9hP18jT8Ao5-h2rZGnaL9EoR41a-zD1cHp9VoZ=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">The Heart of It</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczMPU8R5pHsJgY-nX3JvOI9DsT4j4Q44jjRQYbN52tTtG6aXVbDbMKUO7ZCmfpTDNjevGabELnP3-8rCV3GPOczPOmlpZE9AZPIBYSNntFBQF-uapdXy=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">Celebrated</p></div>
+    </div>
+    <div class="photo" onclick="openLb(this)">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczMa-bl9VxaRZYXtbWEANHPJVQlniB49GuK5-ep_mrr9BsRWDZuNPE_brl4NpMHwHqoUCbCgkSE5zgo76TQN7NHSkKtUnw3onar8JW0XM90jyr51RmLT=w1200-h1600-no" alt="" loading="lazy">
+      <div class="veil"></div><div class="pcap"><p class="plbl">Function</p><p class="ptxt">Unforgettable</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING QUOTE -->
+<div class="pq reveal">
+  <p class="pqt">Blink and it's gone.<br>Shoot and it stays.</p>
+  <p class="pqa">— Samynaathen Venkataraman</p>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="footer-name">Samynaathen Venkataraman</p>
+  <p class="footer-tag">Every moment worth remembering · Every memory worth keeping</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" onclick="closeLb(event)">
+  <div class="lb-wrap" onclick="event.stopPropagation()">
+    <button class="lb-x" onclick="closeLb({force:true})">✕</button>
+    <img id="lb-img" src="" alt="">
+  </div>
+</div>
+
+<script>
+function openLb(el){
+  const src=el.querySelector('img').src;
+  document.getElementById('lb-img').src=src.replace(/=w\d+-h\d+-no/,'=w1800-h2200-no');
+  document.getElementById('lb').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeLb(e){
+  if(!e||e.force||e.target===document.getElementById('lb')){
+    document.getElementById('lb').classList.remove('on');
+    document.body.style.overflow='';
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb({force:true});});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(en=>{if(en.isIntersecting)en.target.classList.add('in');});
+},{threshold:.07,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
